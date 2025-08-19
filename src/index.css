@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+/* Define the custom font */
+@font-face {
+  font-family: 'pokemon-font';
+  src: url('/src/assets/font/Pokemon Solid.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* Create a Tailwind utility class for the font */
+@layer utilities {
+  /* Pokémon font styling */
+  .font-pokemon {
+    font-family: 'pokemon-font', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* Official logo effects */
+  .pokemon-logo {
+    color: #ffcb05; /* Official Pokémon yellow */
+    text-shadow: 
+      4px 4px 0 #2a75bb,    /* Official Pokémon blue outline */
+      -4px -4px 0 #2a75bb,
+      4px -4px 0 #2a75bb,
+      -4px 4px 0 #2a75bb,
+      8px 8px 0 #3c5aa6;    /* Secondary darker blue shadow */
+     /* Slight tilt */
+  }
+
+  /* Animation */
+  @keyframes pokemon-intro {
+    0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+    100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+  }
+  .animate-pokemon-intro {
+    animation: pokemon-intro 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
