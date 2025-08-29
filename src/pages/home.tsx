@@ -36,8 +36,12 @@ class Home extends React.Component {
               <div className="flex items-center justify-center gap-3">
                 <span className="text-2xl">🏆</span>
                 <div>
-                  <div className="text-sm text-gray-600 font-medium">Best Score</div>
-                  <div className="text-2xl font-bold text-yellow-600">{lastScore}</div>
+                  <div className="text-sm text-gray-600 font-medium">
+                    Best Score
+                  </div>
+                  <div className="text-2xl font-bold text-yellow-600">
+                    {lastScore}
+                  </div>
                 </div>
               </div>
             </div>
@@ -45,29 +49,32 @@ class Home extends React.Component {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/game" className="w-full sm:w-auto">
-              <button className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-green-400">
-                <div className="flex items-center justify-center gap-3">
-                  <span className="text-xl group-hover:animate-spin">⚡</span>
-                  <span>Start Game</span>
-                </div>
-              </button>
+            <Link
+              to="/game"
+              className=" group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-green-400"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-xl group-hover:animate-spin">⚡</span>
+                <span>Start Game</span>
+              </div>
             </Link>
-            
-            <Link to="/pokedex" className="w-full sm:w-auto">
-              <button className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-red-400">
-                <div className="flex items-center justify-center gap-3">
-                  <span className="text-xl group-hover:animate-bounce">📖</span>
-                  <span>Pokédex</span>
-                </div>
-              </button>
+
+            <Link
+              to="/pokedex"
+              className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-red-400"
+            >
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-xl group-hover:animate-bounce">📖</span>
+                <span>Pokédex</span>
+              </div>
             </Link>
           </div>
-           {/* Centered High Score */}
+          {/* Centered High Score */}
           <div className="mt-8 flex justify-center">
             <div className="bg-gray-600 backdrop-blur-sm rounded-xl px-6 py-3 border border-white/30">
               <p className="text-white text-lg font-medium text-center">
-                Your Last Score: <span className="font-bold text-yellow-300">{lastScore}</span>
+                Your Last Score:{" "}
+                <span className="font-bold text-yellow-300">{lastScore}</span>
               </p>
             </div>
           </div>
@@ -77,10 +84,12 @@ class Home extends React.Component {
           </p>
         </div>
 
-
         {/* Bottom Wave Effect */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
-      <img src="https://api.visitorbadge.io/api/visitors?path=pokemon-guess-v1.vercel.app&label=VISITORS&countColor=%23263759" alt="Visitor Count" />
+        <img
+          src="https://api.visitorbadge.io/api/visitors?path=pokemon-guess-v1.vercel.app&label=VISITORS&countColor=%23263759"
+          alt="Visitor Count"
+        />
       </div>
     );
   }
