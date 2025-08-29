@@ -63,7 +63,14 @@ class Home extends React.Component {
               </button>
             </Link>
           </div>
-
+           {/* Centered High Score */}
+          <div className="mt-8 flex justify-center">
+            <div className="bg-gray-600 backdrop-blur-sm rounded-xl px-6 py-3 border border-white/30">
+              <p className="text-white text-lg font-medium text-center">
+                Your High Score: <span className="font-bold text-yellow-300">{lastScore}</span>
+              </p>
+            </div>
+          </div>
           {/* Subtitle */}
           <p className="mt-8 text-white/80 text-lg font-medium">
             Test your Pokémon knowledge and become a master trainer!
@@ -73,8 +80,7 @@ class Home extends React.Component {
 
         {/* Bottom Wave Effect */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
-      <img 
-  src="https://api.visitorbadge.io/api/visitors?path=pokemon-guess-v1.vercel.app&label=VISITORS&countColor=%23263759" alt="Visitor Count" />
+      <img src="https://api.visitorbadge.io/api/visitors?path=pokemon-guess-v1.vercel.app&label=VISITORS&countColor=%23263759" alt="Visitor Count" />
       </div>
     );
   }
