@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import VisitorCounter from "../components/visitorCounter";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -69,8 +70,10 @@ class Home extends React.Component {
           </p>
         </div>
 
+
         {/* Bottom Wave Effect */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
+      <VisitorCounter/>
       </div>
     );
   }

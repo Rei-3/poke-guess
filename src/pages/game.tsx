@@ -101,7 +101,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex flex-col items-center p-4 sm:p-6">
         {/* Score and Life Widget - Fixed Position */}
-        <audio src="src/assets/sound/whosthatpokemon.mp3" autoPlay />
+        <audio src="src/assets/sound/whosthatpokemon.mp3"  />
         <div className="fixed top-4 left-4 right-4 z-10 flex justify-center">
           <div className="flex gap-3">
             <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-white/20">
@@ -185,18 +185,40 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
         {/* Fixed Input Bar at Bottom */}
         <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 p-4 z-20">
           <div className="max-w-md mx-auto">
-            <input
-              type="text"
-              placeholder="Enter Pokémon name..."
-              className="w-full px-4 py-3 text-lg border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 transition-colors text-center"
-              ref={this.inputRef}
-              disabled={life === 0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && life > 0) {
-                  this.handleGuess((e.target as HTMLInputElement).value);
-                }
-              }}
-            />
+            <div className="flex gap-3">
+              <input
+                type="text"
+                placeholder="Enter Pokémon name..."
+                className="flex-1 px-4 py-3 text-lg border-2 border-gray-300 rounded-xl focus:outline-none focus:border-blue-500 transition-colors text-center"
+                ref={this.inputRef}
+                disabled={life === 0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && life > 0) {
+                    this.handleGuess((e.target as HTMLInputElement).value);
+                  }
+                }}
+              />
+              <button
+                onClick={() => {
+                  if (this.inputRef.current && this.state.life > 0) {
+                    this.handleGuess(this.inputRef.current.value);
+                  }
+                }}
+                disabled={life === 0}
+                className={`px-6 py-3 rounded-xl font-bold text-white transition-all duration-300 transform ${
+                  life === 0 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 active:scale-95 shadow-lg hover:shadow-xl'
+                }`}
+              >
+                <span className="hidden sm:inline">Submit</span>
+                <span className="sm:hidden">✓</span>
+              </button>
+            </div>
+            {/* Helper text */}
+            <div className="mt-2 text-center text-xs text-gray-500">
+              Press Enter or tap Submit to guess
+            </div>
           </div>
         </div>
       </div>
