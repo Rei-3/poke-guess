@@ -73,7 +73,8 @@ class Home extends React.Component {
 
         {/* Bottom Wave Effect */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/20 to-transparent"></div>
-      <VisitorCounter/>
+      <img 
+  src="https://api.visitorbadge.io/api/visitors?path=pokemon-guess-v1.vercel.app&label=VISITORS&countColor=%23263759" alt="Visitor Count" />
       </div>
     );
   }
