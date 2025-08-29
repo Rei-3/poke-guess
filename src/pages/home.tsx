@@ -31,7 +31,22 @@ class Home extends React.Component {
           </div>
 
           {/* Last Score Display */}
-          {lastScore !== "0" && (
+          {lastScore == "0" ? (
+            <div className="mb-8 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-white/20 animate-fadeIn">
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-2xl">🏆</span>
+                <div>
+                  <div className="text-sm text-gray-600 font-medium">
+                    Best Score
+                  </div>
+                  <div className="text-2xl font-bold text-yellow-600">
+                    {lastScore}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ):
+          (
             <div className="mb-8 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-white/20 animate-fadeIn">
               <div className="flex items-center justify-center gap-3">
                 <span className="text-2xl">🏆</span>
@@ -49,7 +64,7 @@ class Home extends React.Component {
 
           {/* Action Buttons */}
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-28">
          
               <Link to="/game"
               className=" group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-green-400"
