@@ -67,7 +67,7 @@ class Home extends React.Component {
           <div className="mt-8 flex justify-center">
             <div className="bg-gray-600 backdrop-blur-sm rounded-xl px-6 py-3 border border-white/30">
               <p className="text-white text-lg font-medium text-center">
-                Your High Score: <span className="font-bold text-yellow-300">{lastScore}</span>
+                Your Last Score: <span className="font-bold text-yellow-300">{lastScore}</span>
               </p>
             </div>
           </div>
