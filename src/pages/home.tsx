@@ -50,23 +50,27 @@ class Home extends React.Component {
           {/* Action Buttons */}
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className=" group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-green-400">
-              <Link to="/game">
+         
+              <Link to="/game"
+              className=" group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-green-400"
+              >
                 <div className="flex items-center justify-center gap-3">
                   <span className="text-xl group-hover:animate-spin">⚡</span>
                   <span>Start Game</span>
                 </div>
               </Link>
-            </button>
+       
 
-            <button className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-red-400">
-              <Link to="/pokedex">
+          
+              <Link to="/pokedex"
+              className="group w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl border-2 border-red-400"
+              >
                 <div className="flex items-center justify-center gap-3">
                   <span className="text-xl group-hover:animate-bounce">📖</span>
                   <span>Pokédex</span>
                 </div>
               </Link>
-            </button>
+            
           </div>
           {/* Centered High Score */}
           <div className="mt-8 flex justify-center">
