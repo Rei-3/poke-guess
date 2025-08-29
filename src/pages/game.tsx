@@ -101,6 +101,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex flex-col items-center p-4 sm:p-6">
         {/* Score and Life Widget - Fixed Position */}
+        <audio src="src/assets/sound/whosthatpokemon.mp3" autoPlay />
         <div className="fixed top-4 left-4 right-4 z-10 flex justify-center">
           <div className="flex gap-3">
             <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-white/20">
