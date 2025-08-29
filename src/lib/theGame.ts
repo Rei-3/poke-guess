@@ -68,6 +68,23 @@ class Game {
     }
   }
 
+  async stillPlaying(): Promise<void>{
+    this.gameState = "in_progress";
+    try {
+      if (this.life <= 0) {
+        throw new Error("Game Over! Please restart the game.");
+      }
+      this.currentPokemonId = this.generateUniquePokemonId()
+      this.guessedPokemonIds.clear();
+      this.numberOfClues = 5;
+
+      this.currentPokemon = await PokeApi.getPokemon(this.currentPokemonId);
+    } catch (error) {
+      this.gameState = "lost";
+      throw error;
+    }
+  }
+
   private generateUniquePokemonId(): number {
     let id: number;
     do {
