@@ -52,7 +52,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
     }
   }
 
-  componentDidUpdate(prevProps: GamePageProps, prevState: GamePageState) {
+  componentDidUpdate(_prevProps: Readonly<GamePageProps>, prevState: Readonly<GamePageState>) {
     // Save score and navigate when life reaches 0
     if (this.state.life === 0 && prevState.life > 0) {
       localStorage.setItem("lastScore", this.state.score.toString());
