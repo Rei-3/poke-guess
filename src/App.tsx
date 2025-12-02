@@ -3,7 +3,6 @@ import { Link, Route, Routes } from 'react-router-dom'
 import Home from './pages/home'
 import GamePage from './pages/game'
 import Pokedex from './pages/pokedex'
-import { FaGithub, FaGamepad, FaHome, FaBook, FaHeart, FaCrown } from 'react-icons/fa'
 
 
 class App extends React.Component {
