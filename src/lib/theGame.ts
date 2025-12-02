@@ -23,7 +23,7 @@ class Game {
     this.numberOfClues = 5;
     this.totalPokemonCount = 1032;
     this.life = 3;
-    this.timePerGuess = 30; // Increased to 30 seconds for better UX
+    this.timePerGuess = 20; //nerf
     this.timerInterval = null;
     this.currentTimeLeft = this.timePerGuess;
     this.onTimerUpdate = null;
