@@ -1,8 +1,10 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import Home from './pages/home'
 import GamePage from './pages/game'
 import Pokedex from './pages/pokedex'
+import { FaGithub, FaGamepad, FaHome, FaBook, FaHeart, FaCrown } from 'react-icons/fa'
+
 
 class App extends React.Component {
   render() {
@@ -19,9 +21,12 @@ class App extends React.Component {
             
             </Routes>
 
-            <footer>
-              Made by Assookkaa
-            </footer>
+            <footer className="bg-gradient-to-r from-blue-700 to-purple-700 text-white py-6 text-center flex gap-4 justify-center items-center">
+              SKIBIDI!   <img
+          src="https://api.visitorbadge.io/api/visitors?path=pokemon-guess-v1.vercel.app&label=VISITORS&countColor=%23263759"
+          alt="Visitor Count"
+        />
+          </footer>
         </div>
       </>
     )
