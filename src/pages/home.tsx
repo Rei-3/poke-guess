@@ -117,7 +117,7 @@ class Home extends React.Component {
           <div className="text-center bg-red-600/20 backdrop-blur-sm rounded-xl px-6 py-4 mb-6 border border-white/30">
             <div className="flex items-center gap-2 justify-center mb-2">
               <FaHeart className="text-red-400 animate-pulse" />
-              <span>Made with love by Asssookkaa (lie)</span>
+              <span>Made with love by Assookkaa (lie)</span>
             </div>
 
             <div className="space-x-2">
