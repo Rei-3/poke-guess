@@ -21,6 +21,7 @@ interface GamePageState {
   timerActive: boolean;
   lastGuessResult: "correct" | "wrong" | null;
   guessFeedback: string;
+  buttonDisabled: boolean; // New state for temporary disable
 }
 
 class GamePage extends React.Component<GamePageProps, GamePageState> {
@@ -40,7 +41,8 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
     currentTimeLeft: 0,
     timerActive: false,
     lastGuessResult: null,
-    guessFeedback: ""
+    guessFeedback: "",
+    buttonDisabled: false, // Initialize new state
   };
 
   constructor(props: GamePageProps) {
@@ -51,7 +53,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
 
   handleTimerUpdate = (timeLeft: number) => {
     this.setState({ currentTimeLeft: timeLeft });
-    
+
     if (timeLeft <= 0 && this.state.life > 0) {
       this.handleTimeUp();
     }
@@ -59,14 +61,14 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
 
   handleTimeUp = () => {
     console.log("Time's up!");
-    
+
     const newLife = Math.max(0, this.state.life - 1);
-    this.setState({ 
+    this.setState({
       life: newLife,
       lastGuessResult: "wrong",
-      guessFeedback: "⏰ Time's up! Life lost!"
+      guessFeedback: "⏰ Time's up! Life lost!",
     });
-    
+
     if (newLife <= 0) {
       this.endGame();
     } else {
@@ -101,7 +103,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
         life: this.game.getLife(),
         pokemon: this.game.getCurrentPokemon(),
         timePerGuess: this.game.getTimePerGuess(),
-        currentTimeLeft: this.game.getTimePerGuess()
+        currentTimeLeft: this.game.getTimePerGuess(),
       });
       this.startTimer();
     } catch (error) {
@@ -138,14 +140,14 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
 
   async moveToNextPokemon() {
     try {
-      this.setState({ 
+      this.setState({
         guessLoading: true,
         lastGuessResult: null,
-        guessFeedback: ""
+        guessFeedback: "",
       });
-      
+
       await this.game.stillPlaying();
-      
+
       this.setState({
         guessLoading: false,
         pokemon: this.game.getCurrentPokemon(),
@@ -153,9 +155,9 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
         life: this.game.getLife(),
         currentTimeLeft: this.game.getTimePerGuess(),
         lastGuessResult: null,
-        guessFeedback: ""
+        guessFeedback: "",
       });
-      
+
       this.startTimer();
     } catch (error) {
       this.setState({
@@ -166,25 +168,24 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
   }
 
   async handleGuess(name: string) {
-    const { pokemon, numberOfClues, currentTimeLeft } = this.state;
+    const { pokemon, numberOfClues } = this.state;
     const isCorrect =
       pokemon && name.trim().toLowerCase() === pokemon.name.toLowerCase();
 
     this.stopTimer();
     this.inputRef.current!.disabled = true; // Disable input while processing
-    
+
     if (isCorrect) {
-    
       const clueBonus = numberOfClues > 0 ? numberOfClues : 1;
-      const totalBonus = clueBonus ;
-      
+      const totalBonus = clueBonus;
+
       this.game.setScore(this.game.getScore() + totalBonus);
-      
+
       this.setState({
         lastGuessResult: "correct",
-        guessFeedback: `🎉 Correct! +${totalBonus} points! Loading next Pokémon...`
+        guessFeedback: `🎉 Correct! +${totalBonus} points! Loading next Pokémon...`,
       });
-      
+
       // Show success message for 1.5 seconds before loading next
       setTimeout(() => {
         this.moveToNextPokemon().then(() => {
@@ -195,25 +196,24 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
           }
         });
       }, 1500);
-      
     } else {
       this.game.guessPokemon(name);
       const newLife = this.game.getLife();
-      
-      this.setState({ 
+
+      this.setState({
         life: newLife,
         lastGuessResult: "wrong",
-        guessFeedback: "❌ Wrong guess! Try again..."
+        guessFeedback: "❌ Wrong guess! Try again...",
       });
-      
+
       if (newLife <= 0) {
         this.endGame();
       } else {
         // Re-enable input after short delay for wrong guess
         setTimeout(() => {
-          this.setState({ 
+          this.setState({
             lastGuessResult: null,
-            guessFeedback: ""
+            guessFeedback: "",
           });
           if (this.inputRef.current) {
             this.inputRef.current.disabled = false;
@@ -229,7 +229,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
     this.stopTimer();
     localStorage.setItem("lastScore", this.state.score.toString());
     this.setState({
-      guessFeedback: "💀 Game Over! Final score saved."
+      guessFeedback: "💀 Game Over! Final score saved.",
     });
   }
 
@@ -249,22 +249,22 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
   formatTime(seconds: number) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   }
 
   render() {
-    const { 
-      loading, 
-      guessLoading, 
-      error, 
-      pokemon, 
-      score, 
-      life, 
+    const {
+      loading,
+      guessLoading,
+      error,
+      pokemon,
+      score,
+      life,
       currentTimeLeft,
       lastGuessResult,
-      guessFeedback 
+      guessFeedback,
     } = this.state;
-    
+
     const progressWidth = this.getProgressWidth();
     const timerColor = this.getTimerColor();
 
@@ -272,7 +272,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex flex-col items-center p-4 sm:p-6 relative">
         {/* Background Audio */}
         <audio src="./sound/whosthatpokemon.mp3" autoPlay />
-        
+
         {/* Overlay for loading states */}
         {(loading || guessLoading) && (
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
@@ -287,7 +287,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
                     <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-red-400 rounded-full animate-bounce"></div>
                   </div>
                 </div>
-                
+
                 {/* Loading Text */}
                 <div className="text-center">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
@@ -297,12 +297,12 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
                     {guessLoading ? "Searching the Pokémon world..." : "Initializing Pokédex..."}
                   </p>
                 </div>
-                
+
                 {/* Loading Progress Bar */}
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 animate-pulse w-3/4"></div>
                 </div>
-                
+
                 {/* Loading Dots */}
                 <div className="flex gap-2">
                   {[1, 2, 3].map((dot) => (
@@ -328,7 +328,7 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
                 <span className="font-bold text-gray-800">{score}</span>
               </div>
             </div>
-            
+
             {/* Timer */}
             <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-white/20">
               <div className="flex items-center gap-2">
@@ -338,13 +338,13 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
                 </span>
               </div>
               <div className="mt-1 w-full bg-gray-200 rounded-full h-1.5">
-                <div 
+                <div
                   className={`h-1.5 rounded-full bg-gradient-to-r ${timerColor} transition-all duration-1000 ease-linear`}
                   style={{ width: `${progressWidth}%` }}
                 />
               </div>
             </div>
-            
+
             {/* Life */}
             <div className="bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-white/20">
               <div className="flex items-center gap-1">
@@ -367,13 +367,15 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
 
         {/* Guess Feedback Message */}
         {guessFeedback && !guessLoading && (
-          <div className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in ${
-            lastGuessResult === "correct" 
-              ? "bg-green-500 text-white" 
-              : lastGuessResult === "wrong"
-              ? "bg-red-500 text-white"
-              : "bg-blue-500 text-white"
-          } px-6 py-3 rounded-full shadow-lg font-bold text-center`}>
+          <div
+            className={`fixed top-20 left-1/2 transform -translate-x-1/2 z-20 animate-fade-in ${
+              lastGuessResult === "correct"
+                ? "bg-green-500 text-white"
+                : lastGuessResult === "wrong"
+                ? "bg-red-500 text-white"
+                : "bg-blue-500 text-white"
+            } px-6 py-3 rounded-full shadow-lg font-bold text-center`}
+          >
             {guessFeedback}
           </div>
         )}
@@ -422,8 +424,8 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
                 }`}
               />
               <div className="mt-4 text-gray-600 text-sm">
-                {lastGuessResult === "correct" 
-                  ? `It's ${pokemon.name}!` 
+                {lastGuessResult === "correct"
+                  ? `It's ${pokemon.name}!`
                   : "Tap the silhouette for a hint!"}
               </div>
             </div>
@@ -462,13 +464,17 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
               />
               <button
                 onClick={() => {
-                  if (this.inputRef.current && life > 0 && !guessLoading) {
+                  if (this.inputRef.current && life > 0 && !guessLoading && !this.state.buttonDisabled) {
+                    this.setState({ buttonDisabled: true }); // Temporarily disable the button
                     this.handleGuess(this.inputRef.current.value);
+                    setTimeout(() => {
+                      this.setState({ buttonDisabled: false }); // Re-enable the button after 3 seconds
+                    }, 3000);
                   }
                 }}
-                disabled={life === 0 || guessLoading}
+                disabled={life === 0 || guessLoading || this.state.buttonDisabled} // Include the new state in the disabled condition
                 className={`min-w-[60px] px-3 py-3 rounded-xl font-bold text-white transition-all duration-300 transform ${
-                  life === 0 || guessLoading
+                  life === 0 || guessLoading || this.state.buttonDisabled
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 active:scale-95 shadow-lg hover:shadow-xl"
                 }`}
@@ -483,16 +489,15 @@ class GamePage extends React.Component<GamePageProps, GamePageState> {
                 )}
               </button>
             </div>
-            
+
             {/* Helper text */}
             <div className="mt-2 text-center text-xs text-gray-500">
-              {guessLoading 
-                ? "Loading next Pokémon..." 
-                : life > 0 
-                  ? "Press Enter or tap Submit to guess" 
-                  : "Game Over"}
+              {guessLoading
+                ? "Loading next Pokémon..."
+                : life > 0
+                ? "Press Enter or tap Submit to guess"
+                : "Game Over"}
             </div>
-            
           </div>
         </div>
 
