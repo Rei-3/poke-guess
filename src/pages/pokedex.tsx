@@ -12,6 +12,7 @@ class Pokedex extends React.Component {
                 }}
                 className="flex flex-col justify-center items-center min-h-screen bg-gray-100 bg-opacity-60 text-center p-4"
             >
+                <audio src="./sound/daddy.mp3" autoPlay loop />
                 <h1 className="text-4xl bg-amber-300 p-2 rounded font-bold mb-4">Pokédex Page</h1>
                 <h1 className="text-6xl bg-black p-2 rounded-lg font-bold text-yellow-600">
                     This is under construction 
